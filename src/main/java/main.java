@@ -45,6 +45,7 @@ public class main {
 
         int [] arr = getArray(4,5);
         System.out.println(Arrays.toString(arr));
+        System.out.println();
     }
 
     public static void printThreeWords(String word1, String word2, String word3) {
