@@ -45,6 +45,7 @@ public class main {
 
         int [] arr = getArray(4,5);
         System.out.println(Arrays.toString(arr));
+        System.out.println();
     }
 
     public static void printThreeWords(String word1, String word2, String word3) {
@@ -89,12 +90,7 @@ public class main {
 
     public static boolean includeSumInInterval(int first, int second) {
         int sum = first + second;
-
-        if ((sum >= 10) && (sum <= 20)) {
-            return true;
-        } else {
-            return false;
-        }
+        return ((sum >= 10) && (sum <= 20));
     }
 
     public static void checkNumberSign(int number) {
@@ -106,11 +102,7 @@ public class main {
     }
 
     public static boolean isNegative(int number) {
-        if (number < 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return (number < 0);
     }
 
     public static void printSentence(String sentence, int count) {
@@ -122,11 +114,7 @@ public class main {
     }
 
     public static boolean isLeapYear(int year) {
-        if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
     }
 
     public static void createBinaryArray() {
@@ -163,15 +151,10 @@ public class main {
     public static void createArrayWithDiagonale() {
         int[][] table = new int[5][5];
         for (int i = 0; i < table.length; i++) {
-            for (int j = 0; j < table.length; j++) {
-                if (i == j) {
-                    table[i][j] = 1;
-                }
-                if (i == (table.length - 1 - j)) {
-                    table[i][j] = 1;
-                }
-            }
+            table[i][i] = 1;
+            table[i][table.length - 1 - i] = 1;
         }
+
 
         for (int i = 0; i < table.length; i++) {
             for (int j = 0; j < table.length; j++) {
