@@ -1,174 +1,42 @@
 package main.java;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) {
-        printThreeWords("Orange", "Banana", "Apple");
-
-        checkSumSign();
-
-        printColor();
-
-        compareNumbers();
-
-        System.out.println("Введите первое число");
-        Scanner in = new Scanner(System.in);
-        int firstNumber = in.nextInt();
-        System.out.println("Введите второе число");
-        int secondNumber = in.nextInt();
-        System.out.println(includeSumInInterval(firstNumber, secondNumber));
-
-        checkNumberSign(75);
-
-        System.out.println(isNegative(-1));
-
-        printSentence("Hello World",3);
-
-        System.out.println("Введите год");
-        Scanner inyear = new Scanner(System.in);
-        int year = inyear.nextInt();
-        if (isLeapYear(year)) {
-            System.out.println("год високосный");
-        } else {
-            System.out.println("год невисокосный");
-        }
-
-        createBinaryArray();
-
-        createArray();
-
-        multiplyArray();
-
-        createArrayWithDiagonale();
-
-        int [] arr = getArray(4,5);
-        System.out.println(Arrays.toString(arr));
+// 1.
+        Employee worker1 = new Employee("Иванов Иван Иванович", "директор", "1@mail.ru",
+                "79000000000", new BigDecimal(70000), 40);
+        worker1.printInfoEmployee();
         System.out.println();
-    }
 
-    public static void printThreeWords(String word1, String word2, String word3) {
-        System.out.println(word1 + "\n" + word2 + "\n" + word3);
-    }
+// 2.
+        Employee[] employeesArray = new Employee[5];
+        employeesArray[0] = new Employee("Петров Петр Петрович", "инженер", "2@mail.ru",
+                "79000000001", new BigDecimal(40000), 25);
+        employeesArray[1] = new Employee("Карпов Карп Карпович", "инженер", "3@mail.ru",
+                "79000000002", new BigDecimal(40000), 30);
+        employeesArray[2] = new Employee("Иванов Виктор Викторович", "главный инженер",
+                "4@mail.ru","79000000003", new BigDecimal(70000), 31);
+        employeesArray[3] = new Employee("Дмитриева Нина Петровна", "бухгалтер", "5@mail.ru",
+                "79000000004", new BigDecimal(30000), 33);
+        employeesArray[4] = new Employee("Орехова Дария Олеговна", "инженер", "6@mail.ru",
+                "79000000005", new BigDecimal(50000), 25);
 
-    public static void checkSumSign() {
-        int a = -72;
-        int b = 32;
-
-        if (a + b >= 0) {
-            System.out.println("Сумма положительная");
-        } else {
-            System.out.println("Сумма отрицательная");
-        }
-    }
-
-    public static void printColor() {
-        int value = 102;
-
-        if (value <= 0) {
-            System.out.println("Красный");
-        } else {
-            if (value > 100) {
-                System.out.println("Зеленый");
-            } else {
-                System.out.println("Желтый");
-            }
-        }
-    }
-
-    public static void compareNumbers() {
-        int a = 20;
-        int b = 102;
-
-        if (a >= b) {
-            System.out.println("a >= b");
-        } else {
-            System.out.println("a < b");
-        }
-    }
-
-    public static boolean includeSumInInterval(int first, int second) {
-        int sum = first + second;
-        return ((sum >= 10) && (sum <= 20));
-    }
-
-    public static void checkNumberSign(int number) {
-        if (number < 0) {
-            System.out.println("Число отрицательное");
-        } else {
-            System.out.println("Число положительное");
-        }
-    }
-
-    public static boolean isNegative(int number) {
-        return (number < 0);
-    }
-
-    public static void printSentence(String sentence, int count) {
-        if (count > 0) {
-            for (int i = 0; i < count; i++) {
-                System.out.println(sentence);
-            }
-        }
-    }
-
-    public static boolean isLeapYear(int year) {
-        return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
-    }
-
-    public static void createBinaryArray() {
-        byte[] arr = {0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1};
-
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == 0) {
-                arr[i] = 1;
-            } else {
-                arr[i] = 0;
-            }
-        }
-        System.out.println(Arrays.toString(arr));
-    }
-
-    public static void createArray() {
-        int[] array = new int[100];
-        for (int i = 0; i < array.length; ) {
-            array[i] = ++i;
-        }
-        System.out.println(Arrays.toString(array));
-    }
-
-    public static void multiplyArray() {
-        int[] arr = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] < 6) {
-                arr[i] *= 2;
-            }
-        }
-        System.out.println(Arrays.toString(arr));
-    }
-
-    public static void createArrayWithDiagonale() {
-        int[][] table = new int[5][5];
-        for (int i = 0; i < table.length; i++) {
-            table[i][i] = 1;
-            table[i][table.length - 1 - i] = 1;
-        }
-
-
-        for (int i = 0; i < table.length; i++) {
-            for (int j = 0; j < table.length; j++) {
-                System.out.print(" " + table[i][j] + " ");
-            }
+        for (int i = 0; i < employeesArray.length; i++) {
+            employeesArray[i].printInfoEmployee();
             System.out.println();
         }
-    }
 
-    public static int [] getArray(int len, int initialValue) {
-        int[] arr = new int[len];
-        for (int i = 0; i < len; i++) {
-            arr[i] = initialValue;
-        }
-        return arr;
+// 3.
+        Park parkGorkogo = new Park("Парк Горького", "8:00 - 18:00");
+        Park.Attraction attr1ParkGorkogo = parkGorkogo.new Attraction("Колесо обзора", 150,
+                "8:00 - 17:00");
+        Park.Attraction attr2ParkGorkogo = parkGorkogo.new Attraction("Ракета", 200,
+                "10:00 - 18:00");
+
     }
 }
+
