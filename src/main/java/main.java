@@ -1,5 +1,6 @@
 package main.java;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -7,22 +8,22 @@ public class main {
     public static void main(String[] args) {
 // 1.
         Employee worker1 = new Employee("Иванов Иван Иванович", "директор", "1@mail.ru",
-                "79000000000", 200000, 40);
+                "79000000000", new BigDecimal(70000), 40);
         worker1.printInfoEmployee();
         System.out.println();
 
 // 2.
         Employee[] employeesArray = new Employee[5];
         employeesArray[0] = new Employee("Петров Петр Петрович", "инженер", "2@mail.ru",
-                "79000000001", 40000, 25);
+                "79000000001", new BigDecimal(40000), 25);
         employeesArray[1] = new Employee("Карпов Карп Карпович", "инженер", "3@mail.ru",
-                "79000000002", 40000, 30);
+                "79000000002", new BigDecimal(40000), 30);
         employeesArray[2] = new Employee("Иванов Виктор Викторович", "главный инженер",
-                "4@mail.ru","79000000003", 70000, 31);
+                "4@mail.ru","79000000003", new BigDecimal(70000), 31);
         employeesArray[3] = new Employee("Дмитриева Нина Петровна", "бухгалтер", "5@mail.ru",
-                "79000000004", 30000, 33);
+                "79000000004", new BigDecimal(30000), 33);
         employeesArray[4] = new Employee("Орехова Дария Олеговна", "инженер", "6@mail.ru",
-                "79000000005", 50000, 25);
+                "79000000005", new BigDecimal(50000), 25);
 
         for (int i = 0; i < employeesArray.length; i++) {
             employeesArray[i].printInfoEmployee();

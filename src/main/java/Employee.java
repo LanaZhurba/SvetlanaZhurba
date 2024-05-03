@@ -1,14 +1,16 @@
 package main.java;
 
+import java.math.BigDecimal;
+
 public class Employee {
     private String fullName;
     private String position;
     private String email;
     private String numberPhone;
-    private int salary;
+    private BigDecimal salary;
     private int age;
 
-    public Employee(String fullName, String position, String email, String numberPhone, int salary, int age) {
+    public Employee(String fullName, String position, String email, String numberPhone, BigDecimal salary, int age) {
         this.fullName = fullName;
         this.position = position;
         this.email = email;
