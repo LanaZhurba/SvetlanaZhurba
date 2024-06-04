@@ -10,10 +10,10 @@ public class main {
         HashSet<String> set = new HashSet<>();
         ArrayList<String> listUniqueWords = new ArrayList<>();
         for (String ar : array) {
-            if (set.add(ar.toLowerCase(Locale.ROOT))) {
-                listUniqueWords.add(ar.toLowerCase(Locale.ROOT));
+            if (set.add(ar)) {
+                listUniqueWords.add(ar);
             } else {
-                listUniqueWords.remove(ar.toLowerCase(Locale.ROOT));
+                listUniqueWords.remove(ar);
             }
         }
         System.out.println("Список уникальных слов: " + listUniqueWords + "\n");
@@ -21,10 +21,10 @@ public class main {
 
         HashMap<String, Integer> listWordAndCount = new HashMap<>();
         for (String a : array) {
-            if (!listWordAndCount.containsKey(a.toLowerCase(Locale.ROOT))) {
-                listWordAndCount.put(a.toLowerCase(Locale.ROOT), 0);
+            if (!listWordAndCount.containsKey(a)) {
+                listWordAndCount.put(a, 0);
             }
-            listWordAndCount.put(a.toLowerCase(Locale.ROOT), listWordAndCount.get(a.toLowerCase(Locale.ROOT)) + 1);
+            listWordAndCount.put(a, listWordAndCount.get(a) + 1);
         }
         System.out.println(listWordAndCount + "\n");
 
