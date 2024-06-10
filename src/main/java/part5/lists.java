@@ -2,7 +2,7 @@ package part5;
 
 import java.util.*;
 
-public class main {
+public class lists {
     public static void main(String[] args) {
         String[] array = {"молоко", "карусель", "сыр", "молоко", "машина", "молокочай", "Машина", "Кресло", "молоко", "Молоко",
                 "машина", "сыр", "доска", "кресло", "тетрадь"};
