@@ -13,13 +13,13 @@ public class FactorialTest {
     private Factorial number;
 
     @Before
-    public void createFactorial(){
+    public void createFactorial() {
         number = new Factorial();
     }
 
     @Test
     @DisplayName("Проверка на валидные значения")
-    public void validValue(){
+    public void validValue() throws MyCheckNaturalException {
         Assertions.assertEquals(new BigInteger("2432902008176640000"), number.calculateF(20));
         Assertions.assertEquals(new BigInteger("1"), number.calculateF(1));
         Assertions.assertEquals(new BigInteger("6"), number.calculateF(3));
@@ -28,8 +28,13 @@ public class FactorialTest {
 
     @Test
     @DisplayName("Проверка на невалидные значения")
-    public void unvalidValue() {
-        Assertions.assertEquals(null, number.calculateF(-10));
+    public void unvalidValue() throws MyCheckNaturalException {
+        boolean exceptionCatch = false;
+        try {
+            number.calculateF(-10);
+        } catch (MyCheckNaturalException e) {
+            exceptionCatch = true;
+        }
+        Assertions.assertEquals(false, !exceptionCatch);
     }
-
 }
