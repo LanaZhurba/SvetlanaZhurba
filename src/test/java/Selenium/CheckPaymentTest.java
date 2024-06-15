@@ -3,24 +3,20 @@ package Selenium;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.concurrent.TimeUnit;
 
 
 public class CheckPaymentTest {
     static WebDriver driver;
-    WebDriverWait wait;
+
 
     @BeforeAll
     public static void setUp(){
         System.setProperty("webdriver.chrome.driver", "drivers//chromedriver.exe");
         driver = new ChromeDriver();
         driver.navigate().to("https://www.mts.by/");
-        WebElement cookieButton = driver.findElement(By.xpath("//button[@id='cookie-agree']"));
-        cookieButton.click();
+        driver.findElement(By.xpath("//button[@id='cookie-agree']")).click();
     }
 
     @Test
@@ -49,7 +45,9 @@ public class CheckPaymentTest {
         driver.findElement(By.xpath("//div[@class='pay__wrapper']/a")).click();
         String currentUrl = driver.getCurrentUrl();
         Assertions.assertEquals("https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/", currentUrl);
-        driver.navigate().to("https://www.mts.by/");
+        driver.findElement(By.xpath("//button[@id='cookie-agree']")).click();
+        driver.get("https://www.mts.by/");
+        driver.findElement(By.xpath("//button[@id='cookie-agree']")).click();
     }
 
     @Test
@@ -60,7 +58,13 @@ public class CheckPaymentTest {
         driver.findElement(By.xpath("//input[@class='phone']")).sendKeys("297777777");
         driver.findElement(By.xpath("//input[@id='connection-sum']")).sendKeys("100");
         driver.findElement(By.xpath("//form[@id='pay-connection']/button[@type='submit']")).click();
-        driver.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']")));
+        boolean isDisp = driver.findElement(By.xpath("//*[contains(text(), 'Оплата:')]")).isDisplayed();
+        if (isDisp) {
+            String actual = driver.findElement(By.xpath("//*[contains(text(), 'Оплата:')]")).getText();
+            Assertions.assertEquals(actual, "Оплата: Услуги связи Номер:375297777777", "Не прогрузилось окно оплаты");
+        }
     }
 
     @AfterAll
