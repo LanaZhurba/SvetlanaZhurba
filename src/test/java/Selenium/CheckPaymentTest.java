@@ -3,20 +3,26 @@ package Selenium;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
 
 public class CheckPaymentTest {
     static WebDriver driver;
-
+    static WebDriverWait wait;
 
     @BeforeAll
     public static void setUp(){
         System.setProperty("webdriver.chrome.driver", "drivers//chromedriver.exe");
         driver = new ChromeDriver();
-        driver.navigate().to("https://www.mts.by/");
-        driver.findElement(By.xpath("//button[@id='cookie-agree']")).click();
+        wait = new WebDriverWait(driver, 10);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        driver.get("https://www.mts.by/");
+        acceptCookies();
     }
 
     @Test
@@ -42,12 +48,10 @@ public class CheckPaymentTest {
     @Test
     @DisplayName("Проверка перехода по ссылке")
     public void testLink(){
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//div[@class='pay__wrapper']/a")).click();
-        String currentUrl = driver.getCurrentUrl();
-        Assertions.assertEquals("https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/", currentUrl);
-        driver.findElement(By.xpath("//button[@id='cookie-agree']")).click();
+        Assertions.assertTrue(driver.findElement(By.xpath("//span[text()='Порядок оплаты и безопасность интернет платежей']")).isDisplayed(),"нет перехода на другую вкладку");
         driver.get("https://www.mts.by/");
-        driver.findElement(By.xpath("//button[@id='cookie-agree']")).click();
     }
 
     @Test
@@ -64,6 +68,17 @@ public class CheckPaymentTest {
         if (isDisp) {
             String actual = driver.findElement(By.xpath("//*[contains(text(), 'Оплата:')]")).getText();
             Assertions.assertEquals(actual, "Оплата: Услуги связи Номер:375297777777", "Не прогрузилось окно оплаты");
+        }
+    }
+
+    private static void acceptCookies() {
+        try {
+            WebElement cookieButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='btn btn_black cookie__ok']")));
+            if (cookieButton.isDisplayed()) {
+                cookieButton.click();
+            }
+        } catch (Exception e) {
+            System.out.println("Cookie popup not found or clickable");
         }
     }
 
