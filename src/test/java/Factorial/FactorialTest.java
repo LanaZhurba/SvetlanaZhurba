@@ -1,18 +1,17 @@
-package org.example;
+package Factorial;
 
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Before;
-import org.junit.Test;
+import Factorial.Factorial;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.testng.annotations.BeforeTest;
 
 import java.math.BigInteger;
 
 public class FactorialTest {
     private Factorial number;
 
-    @Before
+    @BeforeTest
     public void createFactorial() {
         number = new Factorial();
     }
