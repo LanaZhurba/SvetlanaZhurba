@@ -25,51 +25,52 @@ public class CheckPaymentTest {
         acceptCookies();
     }
 
-    @Test
-    @DisplayName("Проверка названия блока на сайте")
-    public void testCheckName() {
-        String valueText = driver.findElement(By.xpath("//div[@class='pay__wrapper']/h2")).getText();
-        String expectedText = "Онлайн пополнение\n" + "без комиссии";
-        Assertions.assertEquals(valueText,expectedText,"Текст блока не соответствует фактическому значению");
-    }
+//    @Test
+//    @DisplayName("Проверка названия блока на сайте")
+//    public void testCheckName() {
+//        String valueText = driver.findElement(By.xpath("//div[@class='pay__wrapper']/h2")).getText();
+//        String expectedText = "Онлайн пополнение\n" + "без комиссии";
+//        Assertions.assertEquals(valueText,expectedText,"Текст блока не соответствует фактическому значению");
+//    }
+//
+//    @Test
+//    @DisplayName("Проверка логотипов платежных систем")
+//    public void testCheckLogo(){
+//        Assertions.assertAll("Проверка всех логотипов",
+//                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='Visa']")).isDisplayed(), "не отображается Visa"),
+//                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='Verified By Visa']")).isDisplayed(), "не отображается Verified By Visa"),
+//                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='MasterCard']")).isDisplayed(), "не отображается MasterCard"),
+//                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='MasterCard Secure Code']")).isDisplayed(), "не отображается MasterCard Secure Code"),
+//                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='Белкарт']")).isDisplayed(), "не отображается Белкарт")
+//        );
+//    }
+//
+//    @Test
+//    @DisplayName("Проверка перехода по ссылке")
+//    public void testLink(){
+//        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+//        driver.findElement(By.xpath("//div[@class='pay__wrapper']/a")).click();
+//        Assertions.assertTrue(driver.findElement(By.xpath("//span[text()='Порядок оплаты и безопасность интернет платежей']")).isDisplayed(),"нет перехода на другую вкладку");
+//        driver.get("https://www.mts.by/");
+//    }
+//
+//    @Test
+//    @DisplayName("Заполнение полей и проверка работы кнопок")
+//    public void checkInputFormTest() {
+//        driver.findElement(By.xpath("//button[@class='select__header']")).click();
+//        driver.findElement(By.xpath("//p[text()='Услуги связи']")).click();
+//        driver.findElement(By.xpath("//input[@class='phone']")).sendKeys("297777777");
+//        driver.findElement(By.xpath("//input[@id='connection-sum']")).sendKeys("100");
+//        driver.findElement(By.xpath("//form[@id='pay-connection']/button[@type='submit']")).click();
+//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']")));
+//        boolean isDisp = driver.findElement(By.xpath("//*[contains(text(), 'Оплата:')]")).isDisplayed();
+//        if (isDisp) {
+//            String actual = driver.findElement(By.xpath("//*[contains(text(), 'Оплата:')]")).getText();
+//            Assertions.assertEquals(actual, "Оплата: Услуги связи Номер:375297777777", "Не прогрузилось окно оплаты");
+//        }
+//    }
 
-    @Test
-    @DisplayName("Проверка логотипов платежных систем")
-    public void testCheckLogo(){
-        Assertions.assertAll("Проверка всех логотипов",
-                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='Visa']")).isDisplayed(), "не отображается Visa"),
-                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='Verified By Visa']")).isDisplayed(), "не отображается Verified By Visa"),
-                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='MasterCard']")).isDisplayed(), "не отображается MasterCard"),
-                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='MasterCard Secure Code']")).isDisplayed(), "не отображается MasterCard Secure Code"),
-                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='Белкарт']")).isDisplayed(), "не отображается Белкарт")
-        );
-    }
-
-    @Test
-    @DisplayName("Проверка перехода по ссылке")
-    public void testLink(){
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//div[@class='pay__wrapper']/a")).click();
-        Assertions.assertTrue(driver.findElement(By.xpath("//span[text()='Порядок оплаты и безопасность интернет платежей']")).isDisplayed(),"нет перехода на другую вкладку");
-        driver.get("https://www.mts.by/");
-    }
-
-    @Test
-    @DisplayName("Заполнение полей и проверка работы кнопок")
-    public void checkInputFormTest() {
-        driver.findElement(By.xpath("//button[@class='select__header']")).click();
-        driver.findElement(By.xpath("//p[text()='Услуги связи']")).click();
-        driver.findElement(By.xpath("//input[@class='phone']")).sendKeys("297777777");
-        driver.findElement(By.xpath("//input[@id='connection-sum']")).sendKeys("100");
-        driver.findElement(By.xpath("//form[@id='pay-connection']/button[@type='submit']")).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']")));
-        boolean isDisp = driver.findElement(By.xpath("//*[contains(text(), 'Оплата:')]")).isDisplayed();
-        if (isDisp) {
-            String actual = driver.findElement(By.xpath("//*[contains(text(), 'Оплата:')]")).getText();
-            Assertions.assertEquals(actual, "Оплата: Услуги связи Номер:375297777777", "Не прогрузилось окно оплаты");
-        }
-    }
 
     private static void acceptCookies() {
         try {
@@ -80,6 +81,94 @@ public class CheckPaymentTest {
         } catch (Exception e) {
             System.out.println("Cookie popup not found or clickable");
         }
+    }
+
+    @Test
+    @DisplayName("Проверка поля Услуги связи")
+    public void checkFirstField(){
+        driver.findElement(By.xpath("//button[@class='select__header']")).click();
+        driver.findElement(By.xpath("//p[text()='Услуги связи']")).click();
+        String actual = driver.findElement(By.xpath("//p[text()='Услуги связи']")).getText();
+        Assertions.assertEquals("Услуги связи",actual);
+        actual = driver.findElement(By.xpath("//input[@placeholder='Номер телефона']")).getAttribute("placeholder");
+        Assertions.assertEquals(actual,"Номер телефона");
+        actual = driver.findElement(By.xpath("//input[@placeholder='Сумма']")).getAttribute("placeholder");
+        Assertions.assertEquals(actual,"Сумма");
+        actual = driver.findElement(By.xpath("//input[@id='connection-email']")).getAttribute("placeholder");
+        Assertions.assertEquals(actual,"E-mail для отправки чека");
+    }
+
+    @Test
+    @DisplayName("Проверка поля Домашний интернет")
+    public void checkSecondField(){
+        driver.findElement(By.xpath("//button[@class='select__header']")).click();
+        driver.findElement(By.xpath("//p[text()='Домашний интернет']")).click();
+        String actual = driver.findElement(By.xpath("//p[text()='Домашний интернет']")).getText();
+        Assertions.assertEquals("Домашний интернет",actual);
+        actual = driver.findElement(By.xpath("//input[@placeholder='Номер абонента']")).getAttribute("placeholder");
+        Assertions.assertEquals(actual,"Номер абонента");
+        actual = driver.findElement(By.xpath("//input[@placeholder='Сумма']")).getAttribute("placeholder");
+        Assertions.assertEquals(actual,"Сумма");
+        actual = driver.findElement(By.xpath("//input[@id='connection-email']")).getAttribute("placeholder");
+        Assertions.assertEquals(actual,"E-mail для отправки чека");
+    }
+
+    @Test
+    @DisplayName("Проверка поля Рассрочка")
+    public void checkThirdField(){
+        driver.findElement(By.xpath("//button[@class='select__header']")).click();
+        driver.findElement(By.xpath("//p[text()='Рассрочка']")).click();
+        String actual = driver.findElement(By.xpath("//p[text()='Рассрочка']")).getText();
+        Assertions.assertEquals("Рассрочка",actual);
+        actual = driver.findElement(By.xpath("//input[@placeholder='Номер счета на 44']")).getAttribute("placeholder");
+        Assertions.assertEquals(actual,"Номер счета на 44");
+        actual = driver.findElement(By.xpath("//input[@placeholder='Сумма']")).getAttribute("placeholder");
+        Assertions.assertEquals(actual,"Сумма");
+        actual = driver.findElement(By.xpath("//input[@id='connection-email']")).getAttribute("placeholder");
+        Assertions.assertEquals(actual,"E-mail для отправки чека");
+    }
+
+    @Test
+    @DisplayName("Проверка поля Задолженность")
+    public void checkLastField(){
+        driver.findElement(By.xpath("//button[@class='select__header']")).click();
+        driver.findElement(By.xpath("//p[text()='Задолженность']")).click();
+        String actual = driver.findElement(By.xpath("//p[text()='Задолженность']")).getText();
+        Assertions.assertEquals("Задолженность",actual);
+        actual = driver.findElement(By.xpath("//input[@placeholder='Номер счета на 2073']")).getAttribute("placeholder");
+        Assertions.assertEquals(actual,"Номер счета на 2073");
+        actual = driver.findElement(By.xpath("//input[@placeholder='Сумма']")).getAttribute("placeholder");
+        Assertions.assertEquals(actual,"Сумма");
+        actual = driver.findElement(By.xpath("//input[@id='connection-email']")).getAttribute("placeholder");
+        Assertions.assertEquals(actual,"E-mail для отправки чека");
+    }
+
+    @Test
+    @DisplayName("Проверка заполнения полей и отображения логотипов")
+    public void checkInputFormText() {
+        driver.findElement(By.xpath("//button[@class='select__header']")).click();
+        driver.findElement(By.xpath("//p[text()='Услуги связи']")).click();
+        driver.findElement(By.xpath("//input[@class='phone']")).sendKeys("297777777");
+        driver.findElement(By.xpath("//input[@id='connection-sum']")).sendKeys("100");
+        driver.findElement(By.xpath("//input[@id='connection-email']")).sendKeys("see@mail.ru");
+        driver.findElement(By.xpath("//form[@id='pay-connection']/button[@type='submit']")).click();
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        driver.switchTo().frame(wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@class='bepaid-iframe']"))));
+        Assertions.assertEquals("100.00 BYN",driver.findElement(By.xpath("//div[@class='pay-description__cost']//span[1]")).getAttribute("innerHTML"));
+        String sumInButtonText = driver.findElement(By.xpath("//button[@type='submit']")).getAttribute("innerHTML");
+        Assertions.assertEquals(" Оплатить  100.00 BYN <!---->", sumInButtonText);
+        String actual = driver.findElement(By.xpath("//*[contains(text(), 'Оплата:')]")).getAttribute("innerHTML");
+        Assertions.assertEquals(actual, "Оплата: Услуги связи\n" +
+                "Номер:375297777777", "Не прогрузилось окно оплаты");
+        Assertions.assertEquals("Номер карты", driver.findElement(By.xpath("//label[@class='ng-tns-c46-1 ng-star-inserted']")).getAttribute("innerHTML"));
+        Assertions.assertEquals("Срок действия", driver.findElement(By.xpath("//label[@class='ng-tns-c46-4 ng-star-inserted']")).getAttribute("innerHTML"));
+        Assertions.assertEquals("Имя держателя (как на карте)", driver.findElement(By.xpath("//label[@class='ng-tns-c46-3 ng-star-inserted']")).getAttribute("innerHTML"));
+        Assertions.assertEquals("CVC", driver.findElement(By.xpath("//label[@class='ng-tns-c46-5 ng-star-inserted']")).getAttribute("innerHTML"));
+        Assertions.assertTrue(driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/mastercard-system.svg']")).isDisplayed(), "Иконка MasterCard не отображается");
+        Assertions.assertTrue(driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/visa-system.svg']")).isDisplayed(), "Иконка Visa не отображается");
+        Assertions.assertTrue(driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/belkart-system.svg']")).isDisplayed(), "Иконка Белкард не отображается");
+        Assertions.assertTrue(driver.findElement(By.xpath("//div[@class='cards-brands cards-brands_random ng-tns-c61-0 ng-star-inserted']")).isDisplayed(), "Иконка Мир не отображается");
+        driver.get("https://www.mts.by/");
     }
 
     @AfterAll
