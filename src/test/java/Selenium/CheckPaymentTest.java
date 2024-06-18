@@ -88,14 +88,11 @@ public class CheckPaymentTest {
     public void checkFirstField(){
         driver.findElement(By.xpath("//button[@class='select__header']")).click();
         driver.findElement(By.xpath("//p[text()='Услуги связи']")).click();
-        String actual = driver.findElement(By.xpath("//p[text()='Услуги связи']")).getText();
-        Assertions.assertEquals("Услуги связи",actual);
-        actual = driver.findElement(By.xpath("//input[@placeholder='Номер телефона']")).getAttribute("placeholder");
-        Assertions.assertEquals(actual,"Номер телефона");
-        actual = driver.findElement(By.xpath("//input[@placeholder='Сумма']")).getAttribute("placeholder");
-        Assertions.assertEquals(actual,"Сумма");
-        actual = driver.findElement(By.xpath("//input[@id='connection-email']")).getAttribute("placeholder");
-        Assertions.assertEquals(actual,"E-mail для отправки чека");
+        String popupName = driver.findElement(By.xpath("//p[text()='Услуги связи']")).getText();
+        Assertions.assertEquals("Услуги связи",popupName);
+        Assertions.assertEquals(driver.findElement(By.xpath("//input[@placeholder='Номер телефона']")).getAttribute("placeholder"),"Номер телефона");
+        Assertions.assertEquals(driver.findElement(By.xpath("//input[@placeholder='Сумма']")).getAttribute("placeholder"),"Сумма");
+        Assertions.assertEquals(driver.findElement(By.xpath("//input[@id='connection-email']")).getAttribute("placeholder"),"E-mail для отправки чека");
     }
 
     @Test
@@ -103,14 +100,11 @@ public class CheckPaymentTest {
     public void checkSecondField(){
         driver.findElement(By.xpath("//button[@class='select__header']")).click();
         driver.findElement(By.xpath("//p[text()='Домашний интернет']")).click();
-        String actual = driver.findElement(By.xpath("//p[text()='Домашний интернет']")).getText();
-        Assertions.assertEquals("Домашний интернет",actual);
-        actual = driver.findElement(By.xpath("//input[@placeholder='Номер абонента']")).getAttribute("placeholder");
-        Assertions.assertEquals(actual,"Номер абонента");
-        actual = driver.findElement(By.xpath("//input[@placeholder='Сумма']")).getAttribute("placeholder");
-        Assertions.assertEquals(actual,"Сумма");
-        actual = driver.findElement(By.xpath("//input[@id='connection-email']")).getAttribute("placeholder");
-        Assertions.assertEquals(actual,"E-mail для отправки чека");
+        String popupName = driver.findElement(By.xpath("//p[text()='Домашний интернет']")).getText();
+        Assertions.assertEquals("Домашний интернет",popupName);
+        Assertions.assertEquals(driver.findElement(By.xpath("//input[@placeholder='Номер абонента']")).getAttribute("placeholder"),"Номер абонента");
+        Assertions.assertEquals(driver.findElement(By.xpath("//input[@placeholder='Сумма']")).getAttribute("placeholder"),"Сумма");
+        Assertions.assertEquals(driver.findElement(By.xpath("//input[@id='connection-email']")).getAttribute("placeholder"),"E-mail для отправки чека");
     }
 
     @Test
@@ -118,14 +112,11 @@ public class CheckPaymentTest {
     public void checkThirdField(){
         driver.findElement(By.xpath("//button[@class='select__header']")).click();
         driver.findElement(By.xpath("//p[text()='Рассрочка']")).click();
-        String actual = driver.findElement(By.xpath("//p[text()='Рассрочка']")).getText();
-        Assertions.assertEquals("Рассрочка",actual);
-        actual = driver.findElement(By.xpath("//input[@placeholder='Номер счета на 44']")).getAttribute("placeholder");
-        Assertions.assertEquals(actual,"Номер счета на 44");
-        actual = driver.findElement(By.xpath("//input[@placeholder='Сумма']")).getAttribute("placeholder");
-        Assertions.assertEquals(actual,"Сумма");
-        actual = driver.findElement(By.xpath("//input[@id='connection-email']")).getAttribute("placeholder");
-        Assertions.assertEquals(actual,"E-mail для отправки чека");
+        String popupName = driver.findElement(By.xpath("//p[text()='Рассрочка']")).getText();
+        Assertions.assertEquals("Рассрочка",popupName);
+        Assertions.assertEquals(driver.findElement(By.xpath("//input[@placeholder='Номер счета на 44']")).getAttribute("placeholder"),"Номер счета на 44");
+        Assertions.assertEquals(driver.findElement(By.xpath("//input[@placeholder='Сумма']")).getAttribute("placeholder"),"Сумма");
+        Assertions.assertEquals(driver.findElement(By.xpath("//input[@id='connection-email']")).getAttribute("placeholder"),"E-mail для отправки чека");
     }
 
     @Test
@@ -133,14 +124,11 @@ public class CheckPaymentTest {
     public void checkLastField(){
         driver.findElement(By.xpath("//button[@class='select__header']")).click();
         driver.findElement(By.xpath("//p[text()='Задолженность']")).click();
-        String actual = driver.findElement(By.xpath("//p[text()='Задолженность']")).getText();
-        Assertions.assertEquals("Задолженность",actual);
-        actual = driver.findElement(By.xpath("//input[@placeholder='Номер счета на 2073']")).getAttribute("placeholder");
-        Assertions.assertEquals(actual,"Номер счета на 2073");
-        actual = driver.findElement(By.xpath("//input[@placeholder='Сумма']")).getAttribute("placeholder");
-        Assertions.assertEquals(actual,"Сумма");
-        actual = driver.findElement(By.xpath("//input[@id='connection-email']")).getAttribute("placeholder");
-        Assertions.assertEquals(actual,"E-mail для отправки чека");
+        String popupName = driver.findElement(By.xpath("//p[text()='Задолженность']")).getText();
+        Assertions.assertEquals("Задолженность",popupName);
+        Assertions.assertEquals(driver.findElement(By.xpath("//input[@placeholder='Номер счета на 2073']")).getAttribute("placeholder"),"Номер счета на 2073");
+        Assertions.assertEquals(driver.findElement(By.xpath("//input[@placeholder='Сумма']")).getAttribute("placeholder"),"Сумма");
+        Assertions.assertEquals(driver.findElement(By.xpath("//input[@id='connection-email']")).getAttribute("placeholder"),"E-mail для отправки чека");
     }
 
     @Test
@@ -154,11 +142,12 @@ public class CheckPaymentTest {
         driver.findElement(By.xpath("//form[@id='pay-connection']/button[@type='submit']")).click();
         WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.switchTo().frame(wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@class='bepaid-iframe']"))));
-        Assertions.assertEquals("100.00 BYN",driver.findElement(By.xpath("//div[@class='pay-description__cost']//span[1]")).getAttribute("innerHTML"));
         String sumInButtonText = driver.findElement(By.xpath("//button[@type='submit']")).getAttribute("innerHTML");
+        String actualValue = driver.findElement(By.xpath("//*[contains(text(), 'Оплата:')]")).getAttribute("innerHTML");
+
+        Assertions.assertEquals("100.00 BYN",driver.findElement(By.xpath("//div[@class='pay-description__cost']//span[1]")).getAttribute("innerHTML"));
         Assertions.assertEquals(" Оплатить  100.00 BYN <!---->", sumInButtonText);
-        String actual = driver.findElement(By.xpath("//*[contains(text(), 'Оплата:')]")).getAttribute("innerHTML");
-        Assertions.assertEquals(actual, "Оплата: Услуги связи\n" +
+        Assertions.assertEquals(actualValue, "Оплата: Услуги связи\n" +
                 "Номер:375297777777", "Не прогрузилось окно оплаты");
         Assertions.assertEquals("Номер карты", driver.findElement(By.xpath("//label[@class='ng-tns-c46-1 ng-star-inserted']")).getAttribute("innerHTML"));
         Assertions.assertEquals("Срок действия", driver.findElement(By.xpath("//label[@class='ng-tns-c46-4 ng-star-inserted']")).getAttribute("innerHTML"));
