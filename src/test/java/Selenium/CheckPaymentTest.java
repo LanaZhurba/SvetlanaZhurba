@@ -1,5 +1,6 @@
 package Selenium;
 
+import jdk.jfr.Description;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,46 +26,6 @@ public class CheckPaymentTest {
         acceptCookies();
     }
 
-//    @Test
-//    @DisplayName("Проверка названия блока на сайте")
-//    public void testCheckName() {
-//        String valueText = driver.findElement(By.xpath("//div[@class='pay__wrapper']/h2")).getText();
-//        String expectedText = "Онлайн пополнение\n" + "без комиссии";
-//        Assertions.assertEquals(valueText,expectedText,"Текст блока не соответствует фактическому значению");
-//    }
-//
-//    @Test
-//    @DisplayName("Проверка логотипов платежных систем")
-//    public void testCheckLogo(){
-//        Assertions.assertAll("Проверка всех логотипов",
-//                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='Visa']")).isDisplayed(), "не отображается Visa"),
-//                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='Verified By Visa']")).isDisplayed(), "не отображается Verified By Visa"),
-//                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='MasterCard']")).isDisplayed(), "не отображается MasterCard"),
-//                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='MasterCard Secure Code']")).isDisplayed(), "не отображается MasterCard Secure Code"),
-//                () -> Assertions.assertTrue(driver.findElement(By.xpath("//img[@alt='Белкарт']")).isDisplayed(), "не отображается Белкарт")
-//        );
-//    }
-//
-//    @Test
-//    @DisplayName("Проверка перехода по ссылке")
-//    public void testLink(){
-//        driver.findElement(By.xpath("//div[@class='pay__wrapper']/a")).click();
-//        Assertions.assertTrue(driver.findElement(By.xpath("//span[text()='Порядок оплаты и безопасность интернет платежей']")).isDisplayed(),"нет перехода на другую вкладку");
-//        driver.get("https://www.mts.by/");
-//    }
-//
-//    @Test
-//    @DisplayName("Заполнение полей и проверка работы кнопок")
-//    public void checkInputFormTest() {
-//        driver.findElement(By.xpath("//button[@class='select__header']")).click();
-//        driver.findElement(By.xpath("//p[text()='Услуги связи']")).click();
-//        driver.findElement(By.xpath("//input[@class='phone']")).sendKeys("297777777");
-//        driver.findElement(By.xpath("//input[@id='connection-sum']")).sendKeys("100");
-//        driver.findElement(By.xpath("//form[@id='pay-connection']/button")).click();
-//        driver.switchTo().frame(wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@class='bepaid-iframe']"))));
-//        Assertions.assertEquals(driver.findElement(By.xpath("//span[@class='pay-description__text']")).getText(), "Оплата: Услуги связи Номер:375297777777");
-//    }
-
     private static void acceptCookies() {
         try {
             WebElement cookieButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='btn btn_black cookie__ok']")));
@@ -78,6 +39,7 @@ public class CheckPaymentTest {
 
     @Test
     @DisplayName("Проверка поля Услуги связи")
+    @Description("Проверка элементов формы на наличие и корректность надписи в незаполненных полях при выборе Услуги связи")
     public void checkFirstField(){
         driver.findElement(By.xpath("//button[@class='select__header']")).click();
         driver.findElement(By.xpath("//p[text()='Услуги связи']")).click();
@@ -90,6 +52,7 @@ public class CheckPaymentTest {
 
     @Test
     @DisplayName("Проверка поля Домашний интернет")
+    @Description("Проверка элементов формы на наличие и корректность надписи в незаполненных полях при выборе Домашнего интернета")
     public void checkSecondField(){
         driver.findElement(By.xpath("//button[@class='select__header']")).click();
         driver.findElement(By.xpath("//p[text()='Домашний интернет']")).click();
@@ -102,6 +65,7 @@ public class CheckPaymentTest {
 
     @Test
     @DisplayName("Проверка поля Рассрочка")
+    @Description("Проверка элементов формы на наличие и корректность надписи в незаполненных полях при выборе Рассрочки")
     public void checkThirdField(){
         driver.findElement(By.xpath("//button[@class='select__header']")).click();
         driver.findElement(By.xpath("//p[text()='Рассрочка']")).click();
@@ -114,6 +78,7 @@ public class CheckPaymentTest {
 
     @Test
     @DisplayName("Проверка поля Задолженность")
+    @Description("Проверка элементов формы на наличие и корректность надписи в незаполненных полях при выборе Задолженности")
     public void checkLastField(){
         driver.findElement(By.xpath("//button[@class='select__header']")).click();
         driver.findElement(By.xpath("//p[text()='Задолженность']")).click();
@@ -126,6 +91,7 @@ public class CheckPaymentTest {
 
     @Test
     @DisplayName("Проверка заполнения полей и отображения логотипов")
+    @Description("Проверка элементов формы на наличие и корректность надписи в незаполненных полях и наличие логотипов платежных систем")
     public void checkInputFormText() {
         driver.findElement(By.xpath("//button[@class='select__header']")).click();
         driver.findElement(By.xpath("//p[text()='Услуги связи']")).click();
